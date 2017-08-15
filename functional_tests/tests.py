@@ -54,8 +54,8 @@ class NewVisitorTest(LiveServerTestCase):
             '2: Use peacock feathers to make a fly')
         self.check_for_row_in_list_table('1: Buy peacock feathers')
         # 现在一个叫作弗朗西斯的新用户访问了网站
-        ## 我们使用一个新浏览器会话
-        ## 确保伊迪丝的信息不会从cookie中泄露出来
+        # 我们使用一个新浏览器会话
+        # 确保伊迪丝的信息不会从cookie中泄露出来
         self.browser.quit()
         self.browser = webdriver.Chrome()
 
@@ -81,3 +81,14 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertNotIn('Buy peacock feathers', page_text)
         self.assertIn('Buy milk', page_text)
         # 两人都很满意，去睡觉了
+
+    def test_layout_and_styling(self):
+        # 伊迪丝访问首页
+        self.browser.get(self.live_server_url)
+        self.browser.set_window_size(1024, 768)
+        # 她看到输入框完美地居中显示
+
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox.send_keys('testing\n')
+        self.assertAlmostEqual(
+            inputbox.location['x'] + inputbox.size['width'] / 2, 512, delta=5)
