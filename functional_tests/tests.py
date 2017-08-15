@@ -1,9 +1,9 @@
-from django.test import LiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
 
-class NewVisitorTest(LiveServerTestCase):
+class NewVisitorTest(StaticLiveServerTestCase):
     """docstring for NewVisitorTest"""
 
     def setUp(self):
@@ -89,6 +89,6 @@ class NewVisitorTest(LiveServerTestCase):
         # 她看到输入框完美地居中显示
 
         inputbox = self.browser.find_element_by_id('id_new_item')
-        inputbox.send_keys('testing\n')
+        inputbox.send_keys('testing')
         self.assertAlmostEqual(
-            inputbox.location['x'] + inputbox.size['width'] / 2, 512, delta=5)
+            inputbox.location['x'] + inputbox.size['width'] / 2, 512, delta=10)
