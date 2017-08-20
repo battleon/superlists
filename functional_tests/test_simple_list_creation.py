@@ -26,7 +26,7 @@ class NewVisitorTest(FunctionalTest):
         inputbox.send_keys(Keys.ENTER)
         edith_list_url = self.browser.current_url
         self.assertRegex(edith_list_url, '/lists/.+')
-        self.check_for_row_in_list_table('1: Buy peacock feathers')
+        self.wait_for_row_in_list_table('1: Buy peacock feathers')
 
         # 页面中又显示了一个文本框,可以输入其她的待办事项
         # 她输入了“ Use peacock feathers to make a fly (使用孔雀羽毛做假蝇)”
@@ -36,9 +36,9 @@ class NewVisitorTest(FunctionalTest):
         inputbox.send_keys(Keys.ENTER)
 
         # 页面再次更新,她的清单中显示了这两个待办事项
-        self.check_for_row_in_list_table(
+        self.wait_for_row_in_list_table(
             '2: Use peacock feathers to make a fly')
-        self.check_for_row_in_list_table('1: Buy peacock feathers')
+        self.wait_for_row_in_list_table('1: Buy peacock feathers')
         # 现在一个叫作弗朗西斯的新用户访问了网站
         # 我们使用一个新浏览器会话
         # 确保伊迪丝的信息不会从cookie中泄露出来
